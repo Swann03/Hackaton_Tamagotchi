@@ -4,7 +4,8 @@ using UnityEngine.Networking;
 using System;
 using System.Collections.Generic;
 
-//{"type":"general","setup":"Why are pirates called pirates?","punchline":"Because they arrr!","id":304}
+
+//                      --DEPENSES
 [Serializable]
 public struct Depenses
 {
@@ -15,20 +16,71 @@ public struct Depenses
 [Serializable]
 public struct Member
 {
-
-    public string id;
-    public string typeDepense;
+    public int id;
     public int montant;
+    public string typeDepense;
     public string dateDepense;
     public string personnage;
+    public string nomEvenement;
+    public string description;
+    public string nom;
+    public int enfant;
+    public int revenuHebdo;
+
 
 }
+
+
+//                      --EVENEMENTS
+
+[Serializable]
+public struct Evenements
+{
+    public int totalItems;
+    public Member[] memberEvenements;
+}
+
+
+// [Serializable]
+// public struct MemberEvenements
+// {
+//     public int id;
+//     public string nomEvenement;
+//     public string description;
+//     public string personnage;
+// }
+
+
+
+
+//                      --PERSONNAGES
+[Serializable]
+public struct Personnages
+{
+    public int totalItems;
+    public Member[] memberPersonnages;
+
+}
+
+// [Serializable]
+// public struct MemberPersonnages
+// {
+//     public int id;
+//     public string nom;
+//     public int enfant;
+//     public int revenuHebdo;
+// }
+
+
+
 
 public class RequestDb : MonoBehaviour
 {
     private string url = "https://pitifully-ticketless-fabiola.ngrok-free.dev/api";
-    private string jsonData;
-    private List<string> differentAccess = new List<string> { "/depenses", "/evenements", "personnages"};
+    private string jsonDataDepenses;
+    private string jsonDataEvent;
+    private string jsonDataPersonnages;
+    private List<string> differentAccess = new List<string> { "/depenses", "/evenements", "personnages" };
 
     void Start()
     {
@@ -56,11 +108,18 @@ public class RequestDb : MonoBehaviour
 
     private void ReadData(UnityWebRequest uwr)
     {
-        jsonData = uwr.downloadHandler.text;
-        Depenses data = JsonUtility.FromJson<Depenses>(jsonData);
-        Debug.Log(data.totalItems);  //--> ligne à décortiquer
-        Debug.Log(data.member[0].@id);
+        jsonDataDepenses = uwr.downloadHandler.text;
+        Depenses dataDepenses = JsonUtility.FromJson<Depenses>(jsonDataDepenses);
+        Debug.Log(dataDepenses.member[1].montant);
+        Debug.Log(dataDepenses.member[1].typeDepense);
+        
+
+        // jsonDataEvent = uwr.downloadHandler.text;
+
+        // Evenements dataEvent = JsonUtility.FromJson<Evenements>(jsonDataEvent);
+        // Debug.Log(dataEvent.memberEvenements.nomEvenement);
     }
 
- 
+
+
 }

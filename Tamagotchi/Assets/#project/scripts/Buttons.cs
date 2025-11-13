@@ -26,6 +26,7 @@ public class Buttons : MonoBehaviour
 
     public void NoFood()
     {
+
         gameManager.Lives(1);
         Debug.Log("nofood");
     }
