@@ -74,6 +74,9 @@ a:hover {
     font-weight: 600;
 
 }
+#toggleTheme:hover{
+    background-color: var(--light-color);
+}
 .accueil, .reglesbtn {
     display: flex;
     justify-content: center;
@@ -82,27 +85,13 @@ a:hover {
     font-size: 19px;
     background-color: transparent;
     border: none;
+    border-radius: 7px;
     color: var(--light-color);
 
 }
 
 .accueil:hover, .reglesbtn:hover {
     background-color:var(--light-color);
-}
-
-.jeu {
-    display: flex;
-    justify-content: center;
-    width: auto;
-    height: 160%;
-    font-size: 19px;
-    background-color: transparent;
-    border: none;
-    color: var(--light-color);
-}
-
-.jeu:hover {
-    background-color: var(--light-color);
 }
 
 #toggleTheme {
@@ -123,6 +112,8 @@ h2 {
     border-radius: 0 25px 0 25px;
     font-size: 21px;
     padding : 15px;
+    border: 2px solid var(--dark-color);
+    box-shadow: 0 10px 15px var(--dark-color);
 }
 
 .presentation {
