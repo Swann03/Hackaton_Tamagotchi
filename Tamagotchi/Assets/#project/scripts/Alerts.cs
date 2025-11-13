@@ -1,6 +1,5 @@
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.UIElements;
+
 using TMPro;
 
 
@@ -12,20 +11,23 @@ public class Alerts : MonoBehaviour
     public TextMeshProUGUI MamieText;
     public TextMeshProUGUI AssuranceText;
     public TextMeshProUGUI NoelText;
+    [SerializeField] private TextMeshProUGUI salaryText;
+
 
 
     //recup salary
-  
+
 
     // donne des alertes toutes les x tps pour donner nouvelles aléatoires 
     void Start()
     {
+        AlertMamie();
         
     }
 
     void Update()
     {
-        
+
     }
 
     void AlertMamie()
@@ -33,14 +35,15 @@ public class Alerts : MonoBehaviour
         MamieText.gameObject.SetActive(true);
 
         MamieText.text = "Ta mamie t'a envoyé 150 euros !";
-
-        if (Input.GetMouseButtonDown(0)) 
-        {
-            MamieText.gameObject.SetActive(false);
-
-        }
-
         gameManager.add(150);
+        UpdateUi();
+
+        //if (Input.GetMouseButtonDown(0)) 
+        //{
+        //    MamieText.gameObject.SetActive(false);
+
+        //}
+
         
     }
 
@@ -72,5 +75,9 @@ public class Alerts : MonoBehaviour
         }
 
         gameManager.retire(100);
+    }
+    void UpdateUi()
+    {
+        salaryText.text = gameManager.Salary.ToString();
     }
 }
