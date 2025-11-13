@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class NewMonoBehaviourScript : MonoBehaviour
+public class Buttons : MonoBehaviour
 {
     [SerializeField] private GameManager gameManager;
 
@@ -21,13 +21,13 @@ public class NewMonoBehaviourScript : MonoBehaviour
     public void Food()
     {
         gameManager.retire(5);
-        //Console.Log("food");
+        Debug.Log("food");
     }
 
     public void NoFood()
     {
         gameManager.Lives(1);
-        //Console.Log("nofood");
+        Debug.Log("nofood");
     }
 
 

@@ -8,16 +8,19 @@ using System.Collections.Generic;
 [Serializable]
 public struct Depenses
 {
-    public Depense[] member;
+    public Member[] member;
     public int totalItems;
 }
 
 [Serializable]
-public struct Depense
+public struct Member
 {
 
-    public string typeDepense;
     public string id;
+    public string typeDepense;
+    public int montant;
+    public string dateDepense;
+    public string personnage;
 
 }
 
@@ -25,16 +28,17 @@ public class RequestDb : MonoBehaviour
 {
     private string url = "https://pitifully-ticketless-fabiola.ngrok-free.dev/api";
     private string jsonData;
+    private List<string> differentAccess = new List<string> { "/depenses", "/evenements", "personnages"};
 
     void Start()
     {
 
-        StartCoroutine(GetRequest(url + "/depenses"));
+        StartCoroutine(GetRequest(url + differentAccess[0]));
     }
 
     IEnumerator GetRequest(string url)
     {
-        using (UnityWebRequest uwr = UnityWebRequest.Get(url))  //--> pourquoi un usign ici ?
+        using (UnityWebRequest uwr = UnityWebRequest.Get(url)) //necessary to open and close access
         {
             yield return uwr.SendWebRequest();
             if (uwr.result != UnityWebRequest.Result.Success)
