@@ -4,19 +4,35 @@
     box-sizing: border-box;
     font-family: cursive;
 }
+:root{
+    --bg: linear-gradient(105deg, #2A253C, #64A19A, #2A253C);
+    --light-color: #fad3b4;
+    --medium-color: #9BD0D4;
+    --dark-color: #2A253C;
+}
+
+body.dark{
+     --bg: linear-gradient(105deg, #240909, #b47e18, #240909);
+    --light-color: #974754;
+    --medium-color: #a0d49b;
+    --dark-color: #000000;
+}
 
 body {
-    background: linear-gradient(105deg, #2A253C, #64A19A, #2A253C);
     min-height: 100vh;
+    background: var(--bg)
 }
 
 header {
-    background-color: #2A253C;
-    color: #fad3b4;
+    background-color: var(--dark-color);
+    color: var(--light-color);
     position: relative;
     top: 0;
 }
-
+h1{
+    display: flex;
+    justify-content: center;
+}
 ul {
     display: flex;
     justify-content: end;
@@ -26,7 +42,6 @@ ul {
     
 
 }
-
 li {
     list-style: none;
 }
@@ -36,18 +51,17 @@ main {
     justify-content: center;
     align-items: center;
 }
-
-
-
 a {
-    color: #fad3b4;
+    color: var(--light-color);
     text-decoration: none;
 }
-
 a:hover {
-    color: #2A253C
+    color: #2A253C;
 }
-
+#changementTheme{
+    display:flex; 
+            justify-content: end;
+}
 #toggleTheme {
     width: 120px;
     height: 160%;
@@ -55,13 +69,12 @@ a:hover {
     border: none;
     box-shadow: 0 8px 10px rgba(13, 1, 26, 0.3);
     margin: 1% 1% 3% 0;
-    background-color: #9BD0D4;
-    color: #2A253C;
+    background-color: var(--medium-color);
+    color: var(--dark-color);
     font-weight: 600;
 
 }
-
-.accueil {
+.accueil, .reglesbtn {
     display: flex;
     justify-content: center;
     width: auto;
@@ -69,12 +82,12 @@ a:hover {
     font-size: 19px;
     background-color: transparent;
     border: none;
-    color: #fad3b4;
+    color: var(--light-color);
 
 }
 
-.accueil:hover {
-    background-color: #fad3b4;
+.accueil:hover, .reglesbtn:hover {
+    background-color:var(--light-color);
 }
 
 .jeu {
@@ -85,11 +98,11 @@ a:hover {
     font-size: 19px;
     background-color: transparent;
     border: none;
-    color: #fad3b4;
+    color: var(--light-color);
 }
 
 .jeu:hover {
-    background-color: #fad3b4;
+    background-color: var(--light-color);
 }
 
 #toggleTheme {
@@ -103,10 +116,10 @@ h2 {
     justify-content: center;
 }
 
-.regles {
+.reglespres {
     width: 75%;
-    color: #2A253C;
-    background-color: #fad3b4;
+    color: var(--dark-color);
+    background-color: var(--light-color);
     border-radius: 0 25px 0 25px;
     font-size: 21px;
     padding : 15px;
@@ -118,6 +131,7 @@ h2 {
     align-items: center;
     
 }
+
 
 img {
     width: 33%;
@@ -132,8 +146,8 @@ img {
 }
 
 footer {
-    background-color: #2A253C;
-    color: #fad3b4;
+    background-color: var(--dark-color);
+    color: var(--light-color);
     position: relative;
     bottom: 0;
     display: flex;
