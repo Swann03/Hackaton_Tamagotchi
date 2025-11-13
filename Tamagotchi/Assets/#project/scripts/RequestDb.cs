@@ -4,7 +4,7 @@ using UnityEngine.Networking;
 using System;
 using System.Collections.Generic;
 
-//{"type":"general","setup":"Why are pirates called pirates?","punchline":"Because they arrr!","id":304}
+
 [Serializable]
 public struct Depenses
 {
