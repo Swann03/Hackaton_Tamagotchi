@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] GameOver gameOver;
     int salary;
     int money;
 
@@ -23,6 +24,7 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    
 
     public void add(int amount)
     {
@@ -38,19 +40,16 @@ public class GameManager : MonoBehaviour
         lives -= amount;
     }
 
-    public void GameOver()
-    {
-        //stopper le jeu
-        //proposer de rejouer
-       
-    }
 
-    void Update ()
+    void Update()
     {
+  
+
         if (lives <= 3)
         {
-            GameOver();
+            gameOver.Over();
         }
+
 
         //si le temps > 7  = gameover()
 
