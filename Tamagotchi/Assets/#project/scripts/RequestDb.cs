@@ -1,16 +1,14 @@
 using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.Networking;
 using System;
 
 //{"type":"general","setup":"Why are pirates called pirates?","punchline":"Because they arrr!","id":304}
 [Serializable]
-public class Joke
+public struct Joke
 {
-    public int id;
-    public string type;
+    //public int id;
+   // public string type;
     public string setup;
     public string punchline;
 
@@ -29,7 +27,7 @@ public class RequestDb : MonoBehaviour
 
     IEnumerator GetRequest(string url)
     {
-        using (UnityWebRequest uwr = UnityWebRequest.Get(url))
+        using (UnityWebRequest uwr = UnityWebRequest.Get(url))  //--> pourquoi un usign ici ?
         {
             yield return uwr.SendWebRequest();
             if (uwr.result != UnityWebRequest.Result.Success)
@@ -47,11 +45,11 @@ public class RequestDb : MonoBehaviour
 
     private void ReadData(UnityWebRequest uwr)
     {
-        string json = uwr.downloadHandler.text;
-
-        Debug.Log(JsonUtility.FromJson<Joke>(json).setup);
-        Debug.Log(JsonUtility.FromJson<Joke>(json).punchline);
+        jsonData = uwr.downloadHandler.text;
+        Joke reallyGoodJoke = JsonUtility.FromJson<Joke>(jsonData);
+        Debug.Log(reallyGoodJoke.setup);  //--> ligne à décortiquer
+        Debug.Log(reallyGoodJoke.punchline);
     }
 
-
+ 
 }
