@@ -50,7 +50,7 @@ class Personnage
     private Collection $evenements;
 
     #[ORM\Column(nullable: true)]
-    private ?float $revenuMensuel = null;
+    private ?float $revenuHebdo = null;
 
     public function __construct()
     {
@@ -167,14 +167,14 @@ class Personnage
         return $this;
     }
 
-    public function getRevenuMensuel(): ?float
+    public function getRevenuHebdo(): ?float
     {
-        return $this->revenuMensuel;
+        return $this->revenuHebdo;
     }
 
-    public function setRevenuMensuel(?float $revenuMensuel): static
+    public function setRevenuHebdo(?float $revenuHebdo): static
     {
-        $this->revenuMensuel = $revenuMensuel;
+        $this->revenuHebdo = $revenuHebdo;
 
         return $this;
     }
