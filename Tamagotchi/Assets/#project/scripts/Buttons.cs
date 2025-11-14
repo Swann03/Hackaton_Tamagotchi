@@ -1,12 +1,15 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class Buttons : MonoBehaviour
 {
     [SerializeField] private GameManager gameManager;
     [SerializeField] private TextMeshProUGUI salaryText;
+    [SerializeField] private Image alertImage;
+    public TextMeshProUGUI MamieText;
 
-    
+
 
 
     //recup salary
@@ -18,31 +21,36 @@ public class Buttons : MonoBehaviour
  
     public void OnClickButtonUp()
     {
-        Food();
+        yes();
         
     }
 
     public void OnClickButtonDown()
     {
-        NoFood();
+        No();
 
     }
 
 
-    public void Food()
+    public void yes()
     {
       
         gameManager.retire(5);
         Debug.Log("food");
         UpdateUi();
-        
+        gameManager.OnMangerButtonClicked();
+        MamieText.gameObject.SetActive(false);
+        alertImage.gameObject.SetActive(false);
+
+
     }
 
-    public void NoFood()
+    public void No()
     {
-        gameManager.Lives(1);
+        gameManager.Lives();
         Debug.Log("nofood");
         UpdateUi();
+        gameManager.OnMangerButtonClicked();
     }
 
     void UpdateUi()
