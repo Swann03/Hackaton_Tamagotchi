@@ -1034,6 +1034,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 493363feecc90e64c9dcac13ced4c8f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  requestDb: {fileID: 1184447413}
   TimeText: {fileID: 1422833192}
   WinText: {fileID: 875132267}
   clockText: {fileID: 1422833192}
@@ -1980,7 +1981,7 @@ MonoBehaviour:
     member: []
   personnageData:
     totalItems: 0
-    memberPersonnages: []
+    member: []
 --- !u!4 &1184447414
 Transform:
   m_ObjectHideFlags: 0

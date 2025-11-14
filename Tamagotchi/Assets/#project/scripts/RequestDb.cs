@@ -60,7 +60,7 @@ public struct MemberPersonnage
 public struct Personnages
 {
     public int totalItems;
-    public MemberPersonnage[] memberPersonnages;
+    public MemberPersonnage[] member;
 
 }
 

@@ -6,6 +6,8 @@ using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] private RequestDb requestDb;
+    private int idmember;
     [SerializeField] private TextMeshProUGUI TimeText;
     [SerializeField] private TextMeshProUGUI WinText;
     [SerializeField] private TextMeshProUGUI clockText; 
@@ -37,8 +39,8 @@ public class GameManager : MonoBehaviour
     bool isPaused = false;
     int day;
 
-    int requiredFoodClicks;   // nombre de clics nécessaires pour ce repas
-    int currentFoodClicks;    // combien de fois le joueur a cliqué
+    int requiredFoodClicks;   // nombre de clics nï¿½cessaires pour ce repas
+    int currentFoodClicks;    // combien de fois le joueur a cliquï¿½
 
 
     int lives = 3;
@@ -62,16 +64,6 @@ public class GameManager : MonoBehaviour
         }
 
 
-
-        if (Instance == null)
-        {
-            DontDestroyOnLoad(gameObject);
-            Instance = this;
-        }
-        else if (Instance != this)
-        {
-            Destroy(gameObject);
-        }
     }
     private void Start()
     {
@@ -80,7 +72,7 @@ public class GameManager : MonoBehaviour
         ActivateRandomPersos();
         UpdateClockUI();
         alertImage.SetActive(false);
-       alertImageAssurance.SetActive(false);
+        alertImageAssurance.SetActive(false);
 
     }
 
@@ -118,6 +110,9 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        if (!requestDb.isReady) return;
+        idmember = requestDb.personnageData.member[0].id;
+        Debug.Log(idmember);
         UpdateClockUI();
         if (isPaused == true) { return; }
 
@@ -166,13 +161,13 @@ public class GameManager : MonoBehaviour
                 isPaused = true;
                 Debug.Log("pause temps (repas)");
 
-                // on regarde combien il y a de persos à nourrir
+                // on regarde combien il y a de persos ï¿½ nourrir
                 requiredFoodClicks = GetActivePersoCount();
                 currentFoodClicks = 0;
 
-                Debug.Log("Persos à nourrir : " + requiredFoodClicks);
+                Debug.Log("Persos ï¿½ nourrir : " + requiredFoodClicks);
 
-                // si jamais il n’y a personne, on ne bloque pas pour rien
+                // si jamais il nï¿½y a personne, on ne bloque pas pour rien
                 if (requiredFoodClicks == 0)
                 {
                     isPaused = false;
@@ -217,16 +212,16 @@ public class GameManager : MonoBehaviour
         currentFoodClicks++;
         Debug.Log("Food clic : " + currentFoodClicks + " / " + requiredFoodClicks);
 
-        // si on n’a pas encore nourri tout le monde, on reste en pause
+        // si on nï¿½a pas encore nourri tout le monde, on reste en pause
         if (currentFoodClicks < requiredFoodClicks)
             return;
 
-        // ici : tous les persos ont mangé
+        // ici : tous les persos ont mangï¿½
         isPaused = false;
         alertImage.gameObject.SetActive(false);
         alertShown = false;
 
-        Debug.Log("Tous les persos ont mangé, reprise du temps !");
+        Debug.Log("Tous les persos ont mangï¿½, reprise du temps !");
 
     }
     void UpdateClockUI()
@@ -238,7 +233,7 @@ public class GameManager : MonoBehaviour
 
         alertImage.gameObject.SetActive(true);
 
-        MamieText.text = "Ta mamie t'a envoyé 150 euros !";
+        MamieText.text = "Ta mamie t'a envoyï¿½ 150 euros !";
         add(150);
         UpdateUi();
 
@@ -254,7 +249,7 @@ public class GameManager : MonoBehaviour
     {
         AssuranceText.gameObject.SetActive(true);
 
-        AssuranceText.text = "Ta compagnie d'assurance te réclame 30 euros";
+        AssuranceText.text = "Ta compagnie d'assurance te rï¿½clame 30 euros";
 
         retire(30);
         UpdateUi();
