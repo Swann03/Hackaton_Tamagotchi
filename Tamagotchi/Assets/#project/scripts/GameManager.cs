@@ -15,8 +15,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject alertImage;
     [SerializeField] private GameObject alertImageAssurance;
     [SerializeField] private TextMeshProUGUI salaryText;
+    [SerializeField] private TextMeshProUGUI foodText;
+    [SerializeField] private GameObject alertImageFood;
     public TextMeshProUGUI AssuranceText;
     public TextMeshProUGUI MamieText;
+
+    [SerializeField] private TextMeshProUGUI fDJText;
+    [SerializeField] private GameObject alertFDJ;
 
     //[SerializeField] private GameObject perso1;
     //[SerializeField] private GameObject perso2;
@@ -63,6 +68,10 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
 
+        alertImage.SetActive(false);
+        alertImageAssurance.SetActive(false);
+        alertImageFood.SetActive(false);
+        alertFDJ.SetActive(false);
 
     }
     private void Start()
@@ -71,8 +80,6 @@ public class GameManager : MonoBehaviour
         UpdateUi();
         ActivateRandomPersos();
         UpdateClockUI();
-        alertImage.SetActive(false);
-        alertImageAssurance.SetActive(false);
 
     }
 
@@ -155,32 +162,29 @@ public class GameManager : MonoBehaviour
             }
 
            
-            if (heure == 8 && minutes == 0 || heure == 12 && minutes == 0 || heure == 19 && minutes == 0)
+            if (heure == 8 && minutes == 00 || heure == 12 && minutes == 0 || heure == 19 && minutes == 0)
             {
-                // on fige le temps
+                alertImageFood.gameObject.SetActive(true);
+                foodText.text = "Il est l'heure de manger. appuie sur YES si tu veux faire manger la famille. Attention ils doivent tous manger";
                 isPaused = true;
-                Debug.Log("pause temps (repas)");
+                
 
-                // on regarde combien il y a de persos � nourrir
                 requiredFoodClicks = GetActivePersoCount();
                 currentFoodClicks = 0;
 
-                Debug.Log("Persos � nourrir : " + requiredFoodClicks);
+               
 
-                // si jamais il n�y a personne, on ne bloque pas pour rien
                 if (requiredFoodClicks == 0)
                 {
                     isPaused = false;
                 }
-                else
-                {
-                    // ici tu peux aussi afficher ton UI de repas (panel, bouton, etc.)
-                    // ex : alertImage.SetActive(true);
-                }
+               
             }
 
             if (heure == 22 && minutes == 0)
             {
+                alertFDJ.gameObject.SetActive(true);
+                fDJText.text = "fin de journée...";
                 isPaused = true;
                 day++;
                
@@ -205,23 +209,20 @@ public class GameManager : MonoBehaviour
     public void OnMangerButtonClicked()
     {
 
-        // on ne fait quelque chose que si on est en pause repas
         if (!isPaused) return;
 
-        // 1 clic "Food"
         currentFoodClicks++;
-        Debug.Log("Food clic : " + currentFoodClicks + " / " + requiredFoodClicks);
 
-        // si on n�a pas encore nourri tout le monde, on reste en pause
         if (currentFoodClicks < requiredFoodClicks)
             return;
 
-        // ici : tous les persos ont mang�
         isPaused = false;
         alertImage.gameObject.SetActive(false);
+        alertImageFood.gameObject.SetActive(false);
+        alertFDJ.gameObject.SetActive(false);
+
         alertShown = false;
 
-        Debug.Log("Tous les persos ont mang�, reprise du temps !");
 
     }
     void UpdateClockUI()
@@ -249,7 +250,7 @@ public class GameManager : MonoBehaviour
     {
         AssuranceText.gameObject.SetActive(true);
 
-        AssuranceText.text = "Ta compagnie d'assurance te r�clame 30 euros";
+        AssuranceText.text = "Ta compagnie d'assurance te réclame 30 euros";
 
         retire(30);
         UpdateUi();
