@@ -881,7 +881,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TimeText: {fileID: 1422833192}
-  timeSpeed: 0
+  timeSpeed: 0.3
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
