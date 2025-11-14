@@ -1,6 +1,7 @@
 using UnityEngine;
 
 using TMPro;
+using UnityEngine.UI;
 
 
 
@@ -12,6 +13,7 @@ public class Alerts : MonoBehaviour
     public TextMeshProUGUI AssuranceText;
     public TextMeshProUGUI NoelText;
     [SerializeField] private TextMeshProUGUI salaryText;
+    [SerializeField] private Image alertImage;
 
 
 
@@ -33,6 +35,7 @@ public class Alerts : MonoBehaviour
     void AlertMamie()
     {
         MamieText.gameObject.SetActive(true);
+        alertImage.gameObject.SetActive(true);
 
         MamieText.text = "Ta mamie t'a envoyé 150 euros !";
         gameManager.add(150);
