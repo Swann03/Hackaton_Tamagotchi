@@ -1,10 +1,14 @@
 using UnityEngine;
-using TMPro;    
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI TimeText;
     [SerializeField] private GameOver gameOver;
+    [SerializeField] private TextMeshProUGUI WinText;
+    [SerializeField] private TextMeshProUGUI clockText; 
+    [SerializeField] private TextMeshProUGUI perduText;
+
 
     int salary = 2000;
     public int Salary => salary;
@@ -13,7 +17,9 @@ public class GameManager : MonoBehaviour
     int minutes = 0;
 
     float timer;
-   public float timeSpeed;
+    public float timeSpeed;
+    bool isPaused = false;
+    int day;
 
 
 
@@ -35,7 +41,10 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    
+    private void Start()
+    {
+        UpdateClockUI();
+    }
 
     public void add(int amount)
     {
@@ -48,15 +57,52 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public void Lives(int amount)
+    public void Lives()
     {
-        lives -= amount;
+        lives--;
+        
+        
     }
 
+    public void GameOver()
+    {
+
+        if (lives == 0)
+        {
+            perduText.gameObject.SetActive(true);
+            perduText.text = "PERDU !";
+            
+        }
+        //stopper le jeu
+        //proposer de rejouer
+
+    }
 
     void Update()
     {
-  
+        UpdateClockUI();
+        if (isPaused == true) { return; }
+
+        if (day == 2)
+        {
+            WinText.gameObject.SetActive(true);
+            WinText.text = "GAGNE !";
+
+            
+        }
+
+        Temps();
+        GameOver();
+       
+
+    }
+    void Temps()
+    {
+        
+        timer += Time.deltaTime;
+        isPaused = false;
+
+        
 
         if (lives <= 3)
         {
@@ -64,26 +110,50 @@ public class GameManager : MonoBehaviour
         }
 
 
-        //si le temps > 7  = gameover()
+            if (minutes >= 60)
+            {
+                minutes = 0;
+                heure++;
 
                 if (heure >= 24)
                     heure = 0;
+                
+
             }
 
-            Debug.Log($"{heure:D2}:{minutes:D2}");
-
-
-            if (lives <= 3)
+           
+            if (heure == 8 && minutes == 0 || heure == 12 && minutes == 0 || heure == 19 && minutes == 0 || heure == 22 && minutes == 0)
             {
-                gameOver.Over();
+                isPaused = true;
+                Debug.Log("pause temps");
             }
 
-            //si le temps > 7  = gameover()
-
+            if (heure == 22 && minutes == 0)
+            {
+              day++;
+               
+            }
+        
         }
+    
 
-        //3fonctions avec matin, midi soir et un timeSpeed different pour differentes phases).
+
     }
+
+    public void OnMangerButtonClicked()
+    {
+        
+
+        isPaused = false;   
+       
+    }
+    void UpdateClockUI()
+    {
+        clockText.text = $"{heure:D2}:{minutes:D2}";
+    }
+
+
 }
+
 
  
