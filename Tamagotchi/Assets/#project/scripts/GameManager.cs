@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI WinText;
     [SerializeField] private TextMeshProUGUI clockText; 
     [SerializeField] private TextMeshProUGUI perduText;
+    [SerializeField] private RequestDb requestDb;
+    private int idmemeber;
 
 
     int salary = 2000;
@@ -44,6 +46,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         UpdateClockUI();
+
     }
 
     public void add(int amount)
@@ -80,6 +83,10 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        if (!requestDb.isReady) return;
+        idmemeber = requestDb.personnageData.member[0].id;
+        Debug.Log(idmemeber);
+        
         UpdateClockUI();
         if (isPaused == true) { return; }
 
@@ -98,11 +105,11 @@ public class GameManager : MonoBehaviour
     }
     void Temps()
     {
-        
+
         timer += Time.deltaTime;
         isPaused = false;
 
-        
+
 
         if (lives <= 3)
         {
@@ -110,48 +117,44 @@ public class GameManager : MonoBehaviour
         }
 
 
-            if (minutes >= 60)
-            {
-                minutes = 0;
-                heure++;
+        if (minutes >= 60)
+        {
+            minutes = 0;
+            heure++;
 
-                if (heure >= 24)
-                    heure = 0;
-                
+            if (heure >= 24)
+                heure = 0;
 
-            }
 
-           
-            if (heure == 8 && minutes == 0 || heure == 12 && minutes == 0 || heure == 19 && minutes == 0 || heure == 22 && minutes == 0)
-            {
-                isPaused = true;
-                Debug.Log("pause temps");
-            }
-
-            if (heure == 22 && minutes == 0)
-            {
-              day++;
-               
-            }
-        
         }
-    
 
+
+        if (heure == 8 && minutes == 0 || heure == 12 && minutes == 0 || heure == 19 && minutes == 0 || heure == 22 && minutes == 0)
+        {
+            isPaused = true;
+            Debug.Log("pause temps");
+        }
+
+        if (heure == 22 && minutes == 0)
+        {
+            day++;
+
+        }
 
     }
 
-    public void OnMangerButtonClicked()
-    {
-        
+public void OnMangerButtonClicked()
+{
 
-        isPaused = false;   
-       
-    }
-    void UpdateClockUI()
+
+    isPaused = false;
+
+}
+
+void UpdateClockUI()
     {
         clockText.text = $"{heure:D2}:{minutes:D2}";
     }
-
 
 }
 

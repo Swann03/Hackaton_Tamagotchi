@@ -24,6 +24,7 @@ public struct MemberDepense
 
 }
 
+//                      --EVENEMENTS
 [Serializable]
 public struct MemberEvenement
 {
@@ -34,7 +35,6 @@ public struct MemberEvenement
 }
 
 
-//                      --EVENEMENTS
 
 [Serializable]
 public struct Evenements
@@ -60,7 +60,7 @@ public struct MemberPersonnage
 public struct Personnages
 {
     public int totalItems;
-    public MemberPersonnage[] memberPersonnages;
+    public MemberPersonnage[] member;
 
 }
 

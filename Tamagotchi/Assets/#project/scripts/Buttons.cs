@@ -48,7 +48,7 @@ public class Buttons : MonoBehaviour
     public void No()
     {
 
-        gameManager.Lives(1);
+        gameManager.Lives();
         Debug.Log("nofood");
         UpdateUi();
         gameManager.OnMangerButtonClicked();
