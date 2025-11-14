@@ -4,6 +4,7 @@ using TMPro;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI TimeText;
+    [SerializeField] private GameOver gameOver;
 
     int salary = 2000;
     public int Salary => salary;
@@ -74,7 +75,7 @@ public class GameManager : MonoBehaviour
 
             if (lives <= 3)
             {
-                GameOver();
+                gameOver.Over();
             }
 
             //si le temps > 7  = gameover()

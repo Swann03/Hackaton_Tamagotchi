@@ -9,25 +9,28 @@ using System.Collections.Generic;
 [Serializable]
 public struct Depenses
 {
-    public Member[] member;
+    public MemberDepense[] member;
     public int totalItems;
 }
 
 [Serializable]
-public struct Member
+public struct MemberDepense
 {
     public int id;
     public int montant;
     public string typeDepense;
     public string dateDepense;
     public string personnage;
+
+}
+
+[Serializable]
+public struct MemberEvenement
+{
+    public int id;
     public string nomEvenement;
     public string description;
-    public string nom;
-    public int enfant;
-    public int revenuHebdo;
-
-
+    public string personnage;
 }
 
 
@@ -37,39 +40,30 @@ public struct Member
 public struct Evenements
 {
     public int totalItems;
-    public Member[] memberEvenements;
+    public MemberEvenement[] member;
 }
-
-
-// [Serializable]
-// public struct MemberEvenements
-// {
-//     public int id;
-//     public string nomEvenement;
-//     public string description;
-//     public string personnage;
-// }
 
 
 
 
 //                      --PERSONNAGES
 [Serializable]
+public struct MemberPersonnage
+{
+    public int id;
+    public string nom;
+    public int enfant;
+    public int revenuHebdo;
+}
+
+[Serializable]
 public struct Personnages
 {
     public int totalItems;
-    public Member[] memberPersonnages;
+    public MemberPersonnage[] memberPersonnages;
 
 }
 
-// [Serializable]
-// public struct MemberPersonnages
-// {
-//     public int id;
-//     public string nom;
-//     public int enfant;
-//     public int revenuHebdo;
-// }
 
 
 
@@ -80,17 +74,31 @@ public class RequestDb : MonoBehaviour
     private string jsonDataDepenses;
     private string jsonDataEvent;
     private string jsonDataPersonnages;
-    private List<string> differentAccess = new List<string> { "/depenses", "/evenements", "personnages" };
 
-    void Start()
+    public Depenses depenseData;
+    public Evenements eventData;
+    public Personnages personnageData;
+
+    private bool depenseIsReady;
+    private bool eventIsReady;
+    private bool personnageIsReady;
+
+    public bool isReady => depenseIsReady && eventIsReady && personnageIsReady; 
+
+    //private List<string> differentAccess = new List<string> { "/depenses", "/evenements", "personnages" };
+
+    void Awake()
     {
-
-        StartCoroutine(GetRequest(url + differentAccess[0]));
+        StartCoroutine(GetRequestDepenses(url));
+        StartCoroutine(GetRequestEvent(url));
+        StartCoroutine(GetRequestPersonnage(url));
     }
 
-    IEnumerator GetRequest(string url)
+    IEnumerator GetRequestDepenses(string url)
     {
-        using (UnityWebRequest uwr = UnityWebRequest.Get(url)) //necessary to open and close access
+        depenseIsReady = false;
+        string urlDepenses = url + "/depenses";
+        using (UnityWebRequest uwr = UnityWebRequest.Get(urlDepenses)) //necessary to open and close access
         {
             yield return uwr.SendWebRequest();
             if (uwr.result != UnityWebRequest.Result.Success)
@@ -99,25 +107,60 @@ public class RequestDb : MonoBehaviour
             }
             else
             {
-                ReadData(uwr);
+                depenseData = ReadData<Depenses>(uwr);
+                depenseIsReady = true;
+            }
+        }
+
+    }
+
+    IEnumerator GetRequestEvent(string url)
+    {
+        eventIsReady = false;
+        string urlDepenses = url + "/evenements";
+        using (UnityWebRequest uwr = UnityWebRequest.Get(urlDepenses)) //necessary to open and close access
+        {
+            yield return uwr.SendWebRequest();
+            if (uwr.result != UnityWebRequest.Result.Success)
+            {
+                Debug.Log(uwr.error);
+            }
+            else
+            {
+                eventData = ReadData<Evenements>(uwr);
+                eventIsReady = true;
+            }
+        }
+
+    }
+
+    IEnumerator GetRequestPersonnage(string url)
+    {
+        personnageIsReady = false;
+        string urlDepenses = url + "/personnages";
+        using (UnityWebRequest uwr = UnityWebRequest.Get(urlDepenses)) //necessary to open and close access
+        {
+            yield return uwr.SendWebRequest();
+            if (uwr.result != UnityWebRequest.Result.Success)
+            {
+                Debug.Log(uwr.error);
+            }
+            else
+            {
+                personnageData = ReadData<Personnages>(uwr);
+                personnageIsReady = true;
             }
         }
 
     }
 
 
-    private void ReadData(UnityWebRequest uwr)
+    private T ReadData<T>(UnityWebRequest uwr)
     {
         jsonDataDepenses = uwr.downloadHandler.text;
-        Depenses dataDepenses = JsonUtility.FromJson<Depenses>(jsonDataDepenses);
-        Debug.Log(dataDepenses.member[1].montant);
-        Debug.Log(dataDepenses.member[1].typeDepense);
-        
-
-        // jsonDataEvent = uwr.downloadHandler.text;
-
-        // Evenements dataEvent = JsonUtility.FromJson<Evenements>(jsonDataEvent);
-        // Debug.Log(dataEvent.memberEvenements.nomEvenement);
+        T data = JsonUtility.FromJson<T>(jsonDataDepenses);
+        return data;
+    
     }
 
 
