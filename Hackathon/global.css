@@ -33,7 +33,7 @@ header {
 }
 h1{
     display: flex;
-    justify-content: center;
+    justify-content: center;  
 }
 ul {
     display: flex;
@@ -41,18 +41,26 @@ ul {
     align-items: center;
     gap: 10px; 
     margin: auto 2%
-    
-
 }
 li {
     list-style: none;
 }
-
 main {
     display: flex;
     justify-content: center;
     align-items: center;
     margin: -10% 5% 8% 0; 
+}
+.jeu{
+    width: 80%; 
+    min-height:80vh;
+    background-color: var(--bg-presentation);
+    border: 2px solid var(--dark-color); 
+    box-shadow: 0 10px 15px var(--dark-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0% 3% 2% 3% ;
 }
 a {
     color: var(--light-color);
@@ -180,11 +188,11 @@ border: 2px solid var(--dark-color);
 background-color: var(--bg-presentation);
  border-radius: 0 25px 0 25px;
  width : 60%; 
-  display: flex;
-    justify-content: center;
-    align-items: center;
-    padding : 15px;
-    border: 2px solid var(--dark-color);
-    box-shadow: 0 10px 15px var(--dark-color);
-    font-size: 19px;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ padding : 15px;
+ border: 2px solid var(--dark-color);
+ box-shadow: 0 10px 15px var(--dark-color);
+ font-size: 19px;
 }
