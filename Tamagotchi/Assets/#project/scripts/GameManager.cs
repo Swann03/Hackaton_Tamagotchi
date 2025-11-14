@@ -1,9 +1,20 @@
 using UnityEngine;
+using TMPro;    
 
 public class GameManager : MonoBehaviour
 {
-    int salary;
-    int money;
+    [SerializeField] private TextMeshProUGUI TimeText;
+
+    int salary = 2000;
+    public int Salary => salary;
+
+    int heure = 7;
+    int minutes = 0;
+
+    float timer;
+   public float timeSpeed;
+
+
 
     int lives = 3;
 
@@ -23,37 +34,55 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    
 
     public void add(int amount)
     {
-        amount += salary;
+        salary += amount;
     }
 
     public void retire(int amount)
     {
         salary -= amount;
     }
+
+
     public void Lives(int amount)
     {
         lives -= amount;
     }
 
-    public void GameOver()
-    {
-        //stopper le jeu
-        //proposer de rejouer
-       
-    }
 
-    void Update ()
+    void Update()
     {
+  
+
         if (lives <= 3)
         {
-            GameOver();
+            gameOver.Over();
         }
+
 
         //si le temps > 7  = gameover()
 
-    }
+                if (heure >= 24)
+                    heure = 0;
+            }
 
+            Debug.Log($"{heure:D2}:{minutes:D2}");
+
+
+            if (lives <= 3)
+            {
+                GameOver();
+            }
+
+            //si le temps > 7  = gameover()
+
+        }
+
+        //3fonctions avec matin, midi soir et un timeSpeed different pour differentes phases).
+    }
 }
+
+ 
