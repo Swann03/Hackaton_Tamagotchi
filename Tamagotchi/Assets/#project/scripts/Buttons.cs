@@ -6,7 +6,7 @@ public class Buttons : MonoBehaviour
 {
     [SerializeField] private GameManager gameManager;
     [SerializeField] private TextMeshProUGUI salaryText;
-    [SerializeField] private Image alertImage;
+    
     public TextMeshProUGUI MamieText;
 
 
@@ -39,8 +39,7 @@ public class Buttons : MonoBehaviour
         
         UpdateUi();
         gameManager.OnMangerButtonClicked();
-        //MamieText.gameObject.SetActive(false);
-        //alertImage.gameObject.SetActive(false);
+       
 
 
     }

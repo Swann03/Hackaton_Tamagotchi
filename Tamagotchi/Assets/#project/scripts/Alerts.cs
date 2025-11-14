@@ -13,7 +13,9 @@ public class Alerts : MonoBehaviour
     public TextMeshProUGUI AssuranceText;
     public TextMeshProUGUI NoelText;
     [SerializeField] private TextMeshProUGUI salaryText;
-    [SerializeField] private Image alertImage;
+   
+    [SerializeField] private GameObject alertImage;
+
 
 
 
@@ -23,8 +25,8 @@ public class Alerts : MonoBehaviour
     // donne des alertes toutes les x tps pour donner nouvelles aléatoires 
     void Start()
     {
-        AlertMamie();
         
+        alertImage.SetActive(false);
     }
 
     void Update()
@@ -34,36 +36,26 @@ public class Alerts : MonoBehaviour
 
     void AlertMamie()
     {
-        MamieText.gameObject.SetActive(true);
+        
         alertImage.gameObject.SetActive(true);
 
         MamieText.text = "Ta mamie t'a envoyé 150 euros !";
         gameManager.add(150);
         UpdateUi();
 
-        //if (Input.GetMouseButtonDown(0)) 
-        //{
-        //    MamieText.gameObject.SetActive(false);
-
-        //}
-
         
     }
 
-    void AlertAssurance()
-    {
-        AssuranceText.gameObject.SetActive(true);
+    //void AlertAssurance()
+    //{
+    //    AssuranceText.gameObject.SetActive(true);
 
-        AssuranceText.text = "Ta compagnie d'assurance te réclame 30 euros";
+    //    AssuranceText.text = "Ta compagnie d'assurance te réclame 30 euros";
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            AssuranceText.gameObject.SetActive(false);
+    //    retire(300);
+    //    UpdateUi();
 
-        }
-
-        gameManager.retire(300);
-    }
+    //}
 
     void AlertNoel()
     {
