@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private RequestDb requestDb;
     private int idmember;
+    private string messageAlert;
+    private int montantAlert;
     [SerializeField] private TextMeshProUGUI TimeText;
     [SerializeField] private TextMeshProUGUI WinText;
     [SerializeField] private TextMeshProUGUI clockText; 
@@ -118,8 +120,6 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         if (!requestDb.isReady) return;
-        idmember = requestDb.personnageData.member[0].id;
-        Debug.Log(idmember);
         UpdateClockUI();
         if (isPaused == true) { return; }
 
@@ -234,8 +234,12 @@ public class GameManager : MonoBehaviour
 
         alertImage.gameObject.SetActive(true);
 
-        MamieText.text = "Ta mamie t'a envoy� 150 euros !";
-        add(150);
+        messageAlert = requestDb.eventData.member[3].nomEvenement;
+        MamieText.text = messageAlert;
+        montantAlert = requestDb.depenseData.member[3].montant;
+
+        add(montantAlert);
+        Debug.Log($"{messageAlert}, {montantAlert}");
         UpdateUi();
 
 
