@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI clockText; 
     [SerializeField] private TextMeshProUGUI perduText;
 
+    [SerializeField] private GameOver gameOver;
 
     int salary = 2000;
     public int Salary => salary;
