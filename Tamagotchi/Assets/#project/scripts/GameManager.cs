@@ -78,7 +78,7 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
-        salary = Random.Range(350, 501);
+        salary = Random.Range(150, 350);
         UpdateUi();
         ActivateRandomPersos();
         UpdateClockUI();
@@ -121,21 +121,24 @@ public class GameManager : MonoBehaviour
     {
         if (!requestDb.isReady) return;
         UpdateClockUI();
-        if (isPaused == true) { return; }
 
         if (day == 2)
         {
             WinText.gameObject.SetActive(true);
             WinText.text = "GAGNE !";
+            isPaused = true;
 
             
         }
+        if (isPaused == true) { return; }
 
         Temps();
         GameOver();
        
 
     }
+
+
     void Temps()
     {
         
@@ -187,11 +190,16 @@ public class GameManager : MonoBehaviour
                 fDJText.text = "fin de journée...";
                 isPaused = true;
                 day++;
+                if (day == 2)
+                {
+                    isPaused = true ;
+                }
                
             }
             if (heure == 10 && minutes == 0)
             {
                 AlertMamie();
+
                 isPaused = true;
                 alertShown = true;
             }
@@ -229,14 +237,19 @@ public class GameManager : MonoBehaviour
     {
         clockText.text = $"{heure:D2}:{minutes:D2}";
     }
+
+    private int rdnMess; 
+    private int rdnMont;
+
     void AlertMamie()
     {
-
+        rdnMess = Random.Range(1, 9);
+        rdnMont = Random.Range(0, 19);
         alertImage.gameObject.SetActive(true);
 
-        messageAlert = requestDb.eventData.member[3].nomEvenement;
+        montantAlert = requestDb.depenseData.member[rdnMess].montant;
+        messageAlert = $"{requestDb.eventData.member[rdnMess].nomEvenement} :  {montantAlert}€";
         MamieText.text = messageAlert;
-        montantAlert = requestDb.depenseData.member[3].montant;
 
         add(montantAlert);
         Debug.Log($"{messageAlert}, {montantAlert}");
