@@ -36,11 +36,11 @@ public class Buttons : MonoBehaviour
     {
       
         gameManager.retire(5);
-        Debug.Log("food");
+        
         UpdateUi();
         gameManager.OnMangerButtonClicked();
-        MamieText.gameObject.SetActive(false);
-        alertImage.gameObject.SetActive(false);
+        //MamieText.gameObject.SetActive(false);
+        //alertImage.gameObject.SetActive(false);
 
 
     }

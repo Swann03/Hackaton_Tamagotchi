@@ -58,7 +58,9 @@ public class GameManager : MonoBehaviour
 
     public void Lives()
     {
-        lives --;
+        lives--;
+        
+        
     }
 
     public void GameOver()
@@ -66,9 +68,9 @@ public class GameManager : MonoBehaviour
 
         if (lives == 0)
         {
-            perduText.text = "PERDU !";
             perduText.gameObject.SetActive(true);
-            //gameover
+            perduText.text = "PERDU !";
+            
         }
         //stopper le jeu
         //proposer de rejouer
@@ -89,6 +91,7 @@ public class GameManager : MonoBehaviour
         }
 
         Temps();
+        GameOver();
        
 
     }
@@ -117,7 +120,7 @@ public class GameManager : MonoBehaviour
 
             }
 
-            Debug.Log($"{heure:D2}:{minutes:D2}");
+           
             if (heure == 8 && minutes == 0 || heure == 12 && minutes == 0 || heure == 19 && minutes == 0 || heure == 22 && minutes == 0)
             {
                 isPaused = true;
@@ -140,7 +143,7 @@ public class GameManager : MonoBehaviour
     {
         
 
-        isPaused = false;   // C’EST ICI QUE TU REPRENDS LE TEMPS
+        isPaused = false;   
        
     }
     void UpdateClockUI()

@@ -884,7 +884,7 @@ MonoBehaviour:
   TimeText: {fileID: 1422833192}
   WinText: {fileID: 875132267}
   clockText: {fileID: 1422833192}
-  perduText: {fileID: 0}
+  perduText: {fileID: 438070233}
   timeSpeed: 0
 --- !u!1 &519420028
 GameObject:
